@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.aniketchatterjee.myapplication">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icon_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.App">
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoggedinScreen" />
+        <activity android:name=".Signup" />
+        <activity android:name=".Verification" />
+        <activity android:name=".DomainConfirm" />
+        <activity android:name=".Homepage" />
+        <activity android:name=".AdminHome" />
+        <activity android:name=".UpdateAdminPW" />
+        <activity android:name=".UpdateUserPW" />
+        <activity android:name=".AdminLogin"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".AssignedInterns" />
+        <activity android:name=".ForgotPassword" />
+
+    </application>
+
+</manifest>

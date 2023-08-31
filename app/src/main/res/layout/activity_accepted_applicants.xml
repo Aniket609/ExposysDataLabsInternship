@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/accepted_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/accepted_domain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_name" />
+
+    <TextView
+        android:id="@+id/accepted_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_domain" />
+
+    <TextView
+        android:id="@+id/accepted_paymentid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_duration" />
+
+    <TextView
+        android:id="@+id/accepted_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_paymentid" />
+
+    <TextView
+        android:id="@+id/accepted_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_phone" />
+    <TextView
+        android:id="@+id/accepted_branch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_email" />
+
+    <TextView
+        android:id="@+id/accepted_college"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_branch" />
+
+    <TextView
+        android:id="@+id/accepted_perc10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_college" />
+
+    <TextView
+        android:id="@+id/accepted_perc12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_perc10" />
+
+    <TextView
+        android:id="@+id/accepted_perc_ug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_perc12" />
+
+    <TextView
+        android:id="@+id/accepted_perc_pg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_perc_ug" />
+
+    <TextView
+        android:id="@+id/accepted_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_perc_pg" />
+
+    <Button
+        android:id="@+id/assign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Assign Project"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assigned_details" />
+
+    <EditText
+        android:id="@+id/assigned_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint = "Please Enter Project Details"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accepted_location" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

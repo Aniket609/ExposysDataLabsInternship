@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/applicant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/applicant_list" />
+
+    <TextView
+        android:id="@+id/applicant_domain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_duration" />
+
+    <TextView
+        android:id="@+id/applicant_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_name" />
+
+    <TextView
+        android:id="@+id/applicant_paymentid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_domain" />
+
+    <TextView
+        android:id="@+id/applicant_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_paymentid" />
+
+    <TextView
+        android:id="@+id/applicant_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_phone" />
+
+    <TextView
+        android:id="@+id/applicant_branch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_email" />
+
+    <TextView
+        android:id="@+id/applicant_college"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_branch" />
+
+    <TextView
+        android:id="@+id/applicant_perc10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_college" />
+
+    <TextView
+        android:id="@+id/applicant_perc12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_perc10" />
+
+    <TextView
+        android:id="@+id/applicant_perc_ug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_perc12" />
+
+    <TextView
+        android:id="@+id/applicant_perc_pg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_perc_ug" />
+
+    <TextView
+        android:id="@+id/applicant_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_perc_pg" />
+
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:text="Accept"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_location" />
+
+    <Button
+        android:id="@+id/reject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:text="Reject"
+        app:layout_constraintStart_toEndOf="@+id/accept"
+        app:layout_constraintTop_toBottomOf="@+id/applicant_location" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
