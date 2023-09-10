@@ -1,5 +1,6 @@
 package com.aniketchatterjee.myapplication;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -12,7 +13,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,6 +22,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Verification extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class Verification extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,31 +96,22 @@ public class Verification extends AppCompatActivity {
         notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(phoneotpnoti, phoneotp.build());
 
-        verify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        verify.setOnClickListener(v -> {
 
-                String otpemail = emailotp.getText().toString();
-                String otpphn = phnotp.getText().toString();
+            String otpemail = emailotp.getText().toString();
+            String otpphn = phnotp.getText().toString();
 
 
-                if (otpemail.equals(String.valueOf(emailotprand)) && otpphn.equals(String.valueOf(phoneotprand))) {
-                    Toast.makeText(Verification.this, "Signed Up! Proceed to Login", Toast.LENGTH_LONG).show();
-                    lib.openScreen(Verification.this, MainActivity.class);
-                    save();
-                } else {
-                    Toast.makeText(Verification.this, "Please enter the correct OTPs", Toast.LENGTH_LONG).show();
-                }
+            if (otpemail.equals(String.valueOf(emailotprand)) && otpphn.equals(String.valueOf(phoneotprand))) {
+                Toast.makeText(Verification.this, "Signed Up! Proceed to Login", Toast.LENGTH_LONG).show();
+                lib.openScreen(Verification.this, MainActivity.class);
+                save();
+            } else {
+                Toast.makeText(Verification.this, "Please enter the correct OTPs", Toast.LENGTH_LONG).show();
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                lib.openScreen(Verification.this, Signup.class);
-            }
-        });
+        back.setOnClickListener(v -> lib.openScreen(Verification.this, Signup.class));
     }
 
     @Override
@@ -131,9 +124,7 @@ public class Verification extends AppCompatActivity {
         List<String> list = new ArrayList<>();
         if (!serializedList.isEmpty()) {
             String[] items = serializedList.split(",");
-            for (String item : items) {
-                list.add(item);
-            }
+            Collections.addAll(list, items);
         }
         return list;
     }

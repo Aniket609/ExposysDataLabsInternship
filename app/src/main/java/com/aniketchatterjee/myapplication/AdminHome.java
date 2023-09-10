@@ -1,5 +1,6 @@
 package com.aniketchatterjee.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,28 +16,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 public class AdminHome extends AppCompatActivity {
 
-    private RecyclerView applicants;
-    private RecyclerView accepted_applicants;
-    private ApplicantsAdapter applicantsAdapter;
     private static AcceptedApplicantsAdapter acceptedApplicantsAdapter;
     private static AcceptedApplicantManager acceptedApplicantManager;
-    private ApplicantManager applicantManager;
     private static SharedPreferences sharedPreferences;
     public MethodLibrary lib = new MethodLibrary();
     private String emid;
     private static int applicant;
     private static int acceptedApplicant;
+    @SuppressLint("StaticFieldLeak")
     private static TextView pending_applications;
     private static List<AdminHome.ItemModel>  applicantdata;
     private static List<AdminHome.ItemModel>  acceptedApplicantData;
@@ -50,8 +50,8 @@ public class AdminHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminhome);
 
-        applicants = findViewById(R.id.applicant_list);
-        accepted_applicants = findViewById(R.id.accepted_applicants);
+        RecyclerView applicants = findViewById(R.id.applicant_list);
+        RecyclerView accepted_applicants = findViewById(R.id.accepted_applicants);
         pending_applications = findViewById(R.id.pending);
         emid = getIntent().getStringExtra("extra");
         handler = new Handler();
@@ -60,7 +60,7 @@ public class AdminHome extends AppCompatActivity {
 
 
         // Create a list of item models
-        applicantManager = Singleton.getInstance(ApplicantManager.class);
+        ApplicantManager applicantManager = Singleton.getInstance(ApplicantManager.class);
         applicantdata = applicantManager.getApplicants();
         acceptedApplicantManager = Singleton.getInstance(AcceptedApplicantManager.class);
         acceptedApplicantData = acceptedApplicantManager.getAcceptedApplicants();
@@ -69,8 +69,7 @@ public class AdminHome extends AppCompatActivity {
         pending();
 
 
-
-        applicantsAdapter = new ApplicantsAdapter(applicantdata);
+        ApplicantsAdapter applicantsAdapter = new ApplicantsAdapter(applicantdata);
         applicants.setAdapter(applicantsAdapter);
         acceptedApplicantsAdapter = new AcceptedApplicantsAdapter(acceptedApplicantData);
         accepted_applicants.setAdapter(acceptedApplicantsAdapter);
@@ -103,25 +102,24 @@ public class AdminHome extends AppCompatActivity {
         List<String> list = new ArrayList<>();
         if (!serializedList.isEmpty()) {
             String[] items = serializedList.split(",");
-            for (String item : items) {
-                list.add(item);
-            }
+            list.addAll(Arrays.asList(items));
         }
         return list;
     }
 
+    @SuppressLint("SetTextI18n")
     public static void pending(){
         if (applicant==0&&acceptedApplicant==0) {
             pending_applications.setText(("There no pending internship applications and no intern is available to be assigned a project"));
         }
-        else if (applicant==0&& !(acceptedApplicant ==0)){
+        else if (applicant == 0){
             pending_applications.setText(("There is no pending internship applications. " +acceptedApplicant + " intern is available to be assigned a project"));
         }
-        else if (!(applicant==0)&& acceptedApplicant==0){
+        else if (acceptedApplicant == 0){
             pending_applications.setText(("There is "+ applicant+ " intership application is available to be reviewed. No intern is available to be assigned a project"));
         }
         else {
-            pending_applications.setText(("There is "+ applicant+ " intership application is available to be reviewed. "+ +acceptedApplicant + " intern is available to be assigned a project"));
+            pending_applications.setText(("There is "+ applicant+ " intership application is available to be reviewed. "+ acceptedApplicant + " intern is available to be assigned a project"));
         }
     }
 
@@ -168,19 +166,19 @@ public class AdminHome extends AppCompatActivity {
 
 
     public static class ItemModel {
-        private String name;
-        private String domain;
-        private String duration;
-        private String paymentid;
-        private String phone;
-        private String email;
-        private String branch;
-        private String college;
-        private String perc10;
-        private String perc12;
-        private String percUG;
-        private String percPG;
-        private String location;
+        private final String name;
+        private final String domain;
+        private final String duration;
+        private final String paymentid;
+        private final String phone;
+        private final String email;
+        private final String branch;
+        private final String college;
+        private final String perc10;
+        private final String perc12;
+        private final String percUG;
+        private final String percPG;
+        private final String location;
 
         public ItemModel(String name, String domain, String duration, String paymentid, String phone, String email, String branch, String college, String perc10, String perc12, String percUG, String percPG, String location ) {
             this.name = name;
@@ -259,13 +257,14 @@ public class AdminHome extends AppCompatActivity {
     }
 
     public static class ApplicantsAdapter extends RecyclerView.Adapter<ApplicantsAdapter.ViewHolder> {
-        private List<ItemModel> applicants;
+        private final List<ItemModel> applicants;
 
         public ApplicantsAdapter(List<ItemModel> applicants) {
 
             this.applicants = applicants;
         }
 
+        @NonNull
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
@@ -274,6 +273,7 @@ public class AdminHome extends AppCompatActivity {
         }
 
 
+        @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             ItemModel item = applicants.get(position);
@@ -372,12 +372,13 @@ public class AdminHome extends AppCompatActivity {
     }
 
     public static class AcceptedApplicantsAdapter extends RecyclerView.Adapter<AcceptedViewHolder> {
-        private List<ItemModel> acceptedApplicants;
+        private final List<ItemModel> acceptedApplicants;
 
         public AcceptedApplicantsAdapter(List<ItemModel> acceptedApplicants) {
             this.acceptedApplicants = acceptedApplicants;
         }
 
+        @NonNull
         @Override
         public AcceptedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
@@ -386,6 +387,7 @@ public class AdminHome extends AppCompatActivity {
         }
 
 
+        @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
         @Override
         public void onBindViewHolder(AcceptedViewHolder accholder, int acceptedposition) {
             ItemModel item = acceptedApplicants.get(acceptedposition);
@@ -421,13 +423,13 @@ public class AdminHome extends AppCompatActivity {
             accholder.assign.setOnClickListener(v -> {
                 List<String> userdata = getlist("userdata");
                 int index = userdata.indexOf(phone);
-                String assignedProject = accholder.assignedDetails.getText().toString();
+                String assignedProject = AcceptedViewHolder.assignedDetails.getText().toString();
                 userdata.set((index+11), assignedProject);
                 writelist(userdata,"userdata");
                 Toast.makeText(v.getContext(), "Project assigned successfully to" + name, Toast.LENGTH_SHORT).show();
                 Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
                 String currentDateTime = dateFormat.format(calendar.getTime()) + " , " + timeFormat.format(calendar.getTime());
                 AssignedInternManager interns = Singleton.getInstance(AssignedInternManager.class);
                 AssignedInterns.ItemModelIntern newIntern = new AssignedInterns.ItemModelIntern(name,domain,duration,paymentID,phone,email,branch,college,perc10,perc12,percUG,percPG, assignedProject, currentDateTime, location);
@@ -462,6 +464,7 @@ public class AdminHome extends AppCompatActivity {
         public TextView acceptedApplicantPercUG;
         public TextView acceptedApplicantPercPG;
         public TextView acceptedApplicantLocation;
+        @SuppressLint("StaticFieldLeak")
         public static EditText assignedDetails;
         public Button assign;
 

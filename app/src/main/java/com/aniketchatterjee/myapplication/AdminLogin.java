@@ -1,14 +1,13 @@
 package com.aniketchatterjee.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AdminLogin extends AppCompatActivity {
@@ -28,6 +28,7 @@ public class AdminLogin extends AppCompatActivity {
         private String emid;
         MethodLibrary lib = new MethodLibrary();
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -44,39 +45,30 @@ public class AdminLogin extends AppCompatActivity {
 
 
 
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    emid = employeeid.getText().toString();
-                    String pword = password.getText().toString();
+            login.setOnClickListener(v -> {
+                emid = employeeid.getText().toString();
+                String pword = password.getText().toString();
 
-                    List<String> employeelist;
-                    List<String> employeepasslist;
-                    employeelist = getlist("employeelist");
-                    employeepasslist = getlist("employeepasslist");
+                List<String> employeelist;
+                List<String> employeepasslist;
+                employeelist = getlist("employeelist");
+                employeepasslist = getlist("employeepasslist");
 
-                    // logic for login process
-                    if (employeelist.contains(emid)) {
-                        int index = employeelist.indexOf(emid);
-                        String pw = employeepasslist.get(index);
-                        if (pword.equals(pw)) {
-                            lib.pass_textOpen_screen(AdminLogin.this, AdminHome.class, emid);
-                        } else {
-                            error.setText(("Wrong Username or Password"));
-                        }
+                // logic for login process
+                if (employeelist.contains(emid)) {
+                    int index = employeelist.indexOf(emid);
+                    String pw = employeepasslist.get(index);
+                    if (pword.equals(pw)) {
+                        lib.pass_textOpen_screen(AdminLogin.this, AdminHome.class, emid);
                     } else {
-                        error.setText(("Wrong Employee ID/Employee doesn't Exists!"));
+                        error.setText(("Wrong Username or Password"));
                     }
+                } else {
+                    error.setText(("Wrong Employee ID/Employee doesn't Exists!"));
                 }
             });
 
-            userlogin.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    lib.openScreen(AdminLogin.this, MainActivity.class);
-                }
-            });
+            userlogin.setOnClickListener(v -> lib.openScreen(AdminLogin.this, MainActivity.class));
 
 
         }
@@ -93,9 +85,7 @@ public class AdminLogin extends AppCompatActivity {
         List<String> list = new ArrayList<>();
         if (!serializedList.isEmpty()) {
             String[] items = serializedList.split(",");
-            for (String item : items) {
-                list.add(item);
-            }
+            Collections.addAll(list, items);
         }
         return list;
     }

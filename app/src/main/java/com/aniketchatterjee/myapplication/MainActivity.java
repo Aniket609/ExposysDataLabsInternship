@@ -1,5 +1,6 @@
 package com.aniketchatterjee.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +10,6 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     MethodLibrary lib = new MethodLibrary();
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,73 +54,56 @@ public class MainActivity extends AppCompatActivity {
         final TextView forgotPW = findViewById(R.id.forgot_pw);
 
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uname = username.getText().toString();
-                String pword = password.getText().toString();
+        login.setOnClickListener(v -> {
+            uname = username.getText().toString();
+            String pword = password.getText().toString();
 
 
-                // initiating necessary data for login process
-                List<String> userdata = getlist("userdata");
+            // initiating necessary data for login process
+            List<String> userdata = getlist("userdata");
 
-                // logic for login process
-                if (userdata.contains(uname)) {
-                    int index = userdata.indexOf(uname);
-                    String pw = userdata.get((index+1));
-                    if (pword.equals(pw)) {
-                       String applied = userdata.get((index+12));
-                        if (applied.equals("yes")) {
-                            lib.pass_textOpen_screen(MainActivity.this, Homepage.class,uname);
-                        }
-                        else {
-                            lib.pass_textOpen_screen(MainActivity.this, LoggedinScreen.class,uname);
-                        }
-
+            // logic for login process
+            if (userdata.contains(uname)) {
+                int index = userdata.indexOf(uname);
+                String pw = userdata.get((index+1));
+                if (pword.equals(pw)) {
+                   String applied = userdata.get((index+12));
+                    if (applied.equals("yes")) {
+                        lib.pass_textOpen_screen(MainActivity.this, Homepage.class,uname);
                     }
                     else {
-                        error.setText(("Wrong Username or Password"));
+                        lib.pass_textOpen_screen(MainActivity.this, LoggedinScreen.class,uname);
                     }
-                } else {
-                    error.setText(("User does not Exist, Please Signup!"));
+
                 }
+                else {
+                    error.setText(("Wrong Username or Password"));
+                }
+            } else {
+                error.setText(("User does not Exist, Please Signup!"));
             }
         });
 
         // to open signup page
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        signUp.setOnClickListener(v -> lib.openScreen(MainActivity.this, Signup.class));
 
-                lib.openScreen(MainActivity.this, Signup.class);
-            }
-        });
+        emplogin.setOnClickListener(v -> {
+            // to initiate and add test data if empty
+            List<String> employeelist;
+            List<String> employeepasslist;
+           employeelist = getlist("employeelist");
+            employeepasslist = getlist("employeepasslist");
+            if (employeelist.isEmpty()||employeepasslist.isEmpty()) {
 
-        emplogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // to initiate and add test data if empty
-                List<String> employeelist;
-                List<String> employeepasslist;
-               employeelist = getlist("employeelist");
-                employeepasslist = getlist("employeepasslist");
-                if (employeelist.isEmpty()||employeepasslist.isEmpty()) {
-
-                    employeelist.add("Exposys");
-                    employeepasslist.add("DataLabs");
-                    writelist(employeelist, "employeelist");
-                    writelist(employeepasslist, "employeepasslist");
-                }
-                // to open login screen for admins
-                lib.openScreen(MainActivity.this, AdminLogin.class);
+                employeelist.add("Exposys");
+                employeepasslist.add("DataLabs");
+                writelist(employeelist, "employeelist");
+                writelist(employeepasslist, "employeepasslist");
             }
+            // to open login screen for admins
+            lib.openScreen(MainActivity.this, AdminLogin.class);
         });
-        forgotPW.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lib.openScreen(MainActivity.this, ForgotPassword.class);
-            }
-        });
+        forgotPW.setOnClickListener(v -> lib.openScreen(MainActivity.this, ForgotPassword.class));
     }
 
     @Override
@@ -140,9 +125,7 @@ public class MainActivity extends AppCompatActivity {
         List<String> list = new ArrayList<>();
         if (!serializedList.isEmpty()) {
             String[] items = serializedList.split(",");
-            for (String item : items) {
-                list.add(item);
-            }
+            Collections.addAll(list, items);
         }
         return list;
     }

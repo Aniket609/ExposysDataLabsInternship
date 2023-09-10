@@ -1,5 +1,6 @@
 package com.aniketchatterjee.myapplication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,14 +21,13 @@ import java.util.List;
 
 public class AssignedInterns extends AppCompatActivity {
 
-    private RecyclerView assignedData;
     MethodLibrary lib = new MethodLibrary();
     private String emid;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assigned_interns);
-        assignedData = findViewById(R.id.assigned_data);
+        RecyclerView assignedData = findViewById(R.id.assigned_data);
         AssignedInternManager interns = Singleton.getInstance(AssignedInternManager.class);
         List<AssignedInterns.ItemModelIntern> internData = interns.getAssignedInterns();
         InternsAdapter internsAdapter = new InternsAdapter(internData);
@@ -74,21 +75,21 @@ public class AssignedInterns extends AppCompatActivity {
 
 
     static class ItemModelIntern {
-        private String name;
-        private String domain;
-        private String duration;
-        private String paymentid;
-        private String phone;
-        private String email;
-        private String branch;
-        private String college;
-        private String perc10;
-        private String perc12;
-        private String percUG;
-        private String percPG;
-        private String project;
-        private String dateTime;
-        private String location;
+        private final String name;
+        private final String domain;
+        private final String duration;
+        private final String paymentid;
+        private final String phone;
+        private final String email;
+        private final String branch;
+        private final String college;
+        private final String perc10;
+        private final String perc12;
+        private final String percUG;
+        private final String percPG;
+        private final String project;
+        private final String dateTime;
+        private final String location;
 
         public ItemModelIntern(String name, String domain, String duration, String paymentid, String phone, String email, String branch, String college, String perc10, String perc12, String percUG, String percPG, String project, String dateTime, String location) {
             this.name = name;
@@ -178,13 +179,14 @@ public class AssignedInterns extends AppCompatActivity {
         }
     }
 
-    public class InternsAdapter extends RecyclerView.Adapter<InternsAdapter.ViewHolder> {
-        private List<ItemModelIntern> interns;
+    public static class InternsAdapter extends RecyclerView.Adapter<InternsAdapter.ViewHolder> {
+        private final List<ItemModelIntern> interns;
 
         public InternsAdapter(List <ItemModelIntern> interns) {
             this.interns = interns;
         }
 
+        @NonNull
         @Override
         public InternsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
@@ -193,6 +195,7 @@ public class AssignedInterns extends AppCompatActivity {
         }
 
 
+        @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             ItemModelIntern item = interns.get(position);
@@ -229,7 +232,7 @@ public class AssignedInterns extends AppCompatActivity {
             return interns.size();
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public static class ViewHolder extends RecyclerView.ViewHolder {
             public TextView internName;
             public TextView internDomain;
             public TextView internDuration;
